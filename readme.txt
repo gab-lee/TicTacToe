@@ -10,7 +10,8 @@ Game setup
 7|8|9
 
 ==variables==
-board=[1,2,3,4,5,6,7,8,9]
+Array board=['1','2','3','4','5','6','7','8','9']
+-> Array stores numbers as characters 
 
 
 ==Helper_fucntions==
@@ -27,24 +28,6 @@ User/Com move
 >> display_board
 >> check_win
 >> check_no_more_moves
-
-
-==Game play==
-
-void main() 
-
-> display_board()
-
-While game_on 
-User_input 
-> while check_valid_move(user_input) == false
-	user_input
-
-after_move_sequence(User_move)
-
-computer_input
->while check_valid_move(Computer_input) == False
-> after_move_sequence (com_move)
 
 
 

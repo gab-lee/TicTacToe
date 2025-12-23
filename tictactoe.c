@@ -1,27 +1,20 @@
 #include <stdio.h>
-
-//helper functions
-/*
-Functions to create
-[x] display_board
-[x] is_valid_move
-[] game_sequence
--> [x] player move
--> [] AI move
-[x] game end
--> [x] Check if win
--> [x] Game end if no more moves
-*/
+#include <stdlib.h>
+#include <time.h> //use to seed rand()
+#include <unistd.h>  // add time delay
 
 void display_board(char board[9])
+//Displays the current state of the board
 {
-	printf("-------------\n");
-	printf("---|%c|%c|%c|---\n",board[0], board [1],board[2]);
-	printf("---|-+-+-|---\n");
-	printf("---|%c|%c|%c|---\n",board[3],board[4],board[5]);
-	printf("---|-+-+-|---\n");
-	printf("---|%c|%c|%c|---\n", board[6],board[7],board[8]);
-	printf("-------------\n");
+	printf("=======================\n");
+	printf("=====-------------=====\n");
+	printf("=====---|%c|%c|%c|---=====\n",board[0], board [1],board[2]);
+	printf("=====---|-+-+-|---=====\n");
+	printf("=====---|%c|%c|%c|---=====\n",board[3],board[4],board[5]);
+	printf("=====---|-+-+-|---=====\n");
+	printf("=====---|%c|%c|%c|---=====\n", board[6],board[7],board[8]);
+	printf("=====-------------=====\n");
+	printf("=======================\n");
 }
 
 int is_move_valid(char user_move,char board[9]){
@@ -36,6 +29,7 @@ int is_move_valid(char user_move,char board[9]){
 }
 
 int check_win (char player, char board[9]){
+//Check if player (Com or player) has won
 	if(board[4]==player){
 		if (board[0]==player && board[8]==player){
 			return 1;
@@ -75,6 +69,7 @@ int check_win (char player, char board[9]){
 	}
 
 int is_game_over(char board[9], int moves){
+//check if the game is over - com/player won or no more moves to be made
 	//player has won
 	if(check_win('o',board)){
 		printf("Player has won\n");
@@ -82,11 +77,13 @@ int is_game_over(char board[9], int moves){
 		}
 	//com won
 	else if(check_win('x',board)){
+		display_board(board);
 		printf("The computer has won\n");
 		return 1;
 		}
 	//no more moves
 	else if (moves==9){
+		printf("No one has won.");
 		return 1;
 		}
 	else {
@@ -101,6 +98,9 @@ void game_sequence(void){
 	char user_move;
 	int game = 0;
 	int moves =0;
+	srand((unsigned)time(NULL)); //seeding a random number only has to be done once
+	int r;
+	char com_move;
 
 //game_start
 	printf("The game is starting\n");
@@ -127,15 +127,24 @@ void game_sequence(void){
 
 //com's turn 
 	else{
-		printf("Let's wait till this part is coded\n");
-		turn = 'o';
-		//game = 0;
-		//moves ++;
-		game = is_game_over(board,moves);
-		}
-		}
-}
+		printf("=======================\n");
+		printf("=Computer is thinking.=\n");
+		while (turn == 'x'){
+			sleep(1);
+			printf("=Thinking.............=\n");
+			r = rand() % 8+1; //give a random number of range 1 to 8
+			com_move = (char)('0'+r);
+			if(is_move_valid(com_move,board)){
+				board[r-1]='x';
+				moves ++;
+				game = is_game_over(board,moves);
+				turn = 'o';
+				}
 
+			}
+		}
+	}
+}
 
 
 int main (void)
