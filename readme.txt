@@ -1,33 +1,27 @@
-Tic Tac Toe
+=================
+===Tic Tac Toe===
+=================
 
-Game setup
-<array> display_board()
-//
+## Context: 
+As I prepare for 42 Piscine next year I thought it would be good to learn some C, and what better way to learn than to learn to code a game. 
+
+
+## Game setup
+Board
 1|2|3
 -+-+-
 4|5|6
 -+-+-
-7|8|9
+7|8|9 
 
-==variables==
-Array board=['1','2','3','4','5','6','7','8','9']
--> Array stores numbers as characters 
+## Game sequence
+- User makes a move -> if not valid -> User is prompted to make a move till valid
+- Display board with user move -> Change to computer's turn
+- Random move is generated for the computer -> Check if move is valid -> repeat number generation till move is valid
+- At the end of each turn check if game is over (either player wins or no more valid moves)
+- Input is always taken as a char for ease of printing. Char can take the form of '1' or 'x' or 'o'.  
 
-
-==Helper_fucntions==
-user_move -> check_valid_move -> return 1 if valid 0 if not valid
-user_move -> overwrite_board //changes the board based on user input 
-board -> display_board -> prints the tic tac toe board
-board -> check_win -> return 1 if there is a winning board, 0 if not
-board -> check_no_more_moves -> return 1 if there are no more moves, 0 if there is still space
-board -> computer_moves random move -> check valid - > if valid then overwrite board -> display board -> check if win 
-
-User/Com move
-> after_move_sequence
->> overwrite_board
->> display_board
->> check_win
->> check_no_more_moves
-
+## Devlog
+- 20251223: I Finished the first version of the game. The game logic works, however the computer you play against is rather dumb. 
 
 
